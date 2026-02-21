@@ -34,25 +34,27 @@ const ChatBoxApp = () => {
            
             <i class="bx bx-arrow-from-right-stroke arrow" />
         </div>
-        <div className="chatName">
+        <div className="chat">
             <div className="prompt">Hi are how you 
                 <span>12:59:45 PM</span>
             </div>
 
-             <div className="chatName">
-            <div className="prompt">Response</div>
+             <div className="response">
+                gfjfgj fjfjf fjfjf jfjfj jfjfj rssy twtw wtwttwt jfj
                 <span>12:59:45 PM</span>
+            
             </div>
 
             <div className="typing">Typing...</div>
             <form className='msg-form'>
-                <i className="fa-solid fa-face smile emoji"
-                placeholder='Type a masge'>
-
-                </i>
-                <input type="text" className='msg-input' />
-
+               
+                <i className="bx bx-wink-tongue smile emoji" />
+                <input type="text" className='msg-input' 
+                 placeholder='Type a message'></input>
+                
             </form>
+                
+
         </div>
       </div>
     </div>
