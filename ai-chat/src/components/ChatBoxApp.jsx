@@ -1,8 +1,48 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './ChatBotApp.css'
 
 
-const ChatBoxApp = () => {
+const ChatBoxApp = ({onBack, chat, setChats}) => {
+const [inputValue, setInputValue] = useState('')
+const[masseges, setMasseges] = useState(chat[0]?.message || [])
+
+
+const handleInputChange = (e) => {
+    setInputValue(e.target.value)
+}
+
+const sendMassege = () => {
+    if(inputValue.trim() === '') return
+
+    const newMessage = {
+        type: 'prompt',
+        text: inputValue,
+        timestamp: new Date().toLocaleDateString("en-gb") 
+        
+    }
+
+    const updatedMessages = [...masseges, newMessage]
+    setMasseges(updatedMessages)
+    setInputValue('')
+
+    const updateChats = chat.map((chat, index)=>{
+        if(index === 0){
+            return {...chat, message: updatedMessages}
+        }
+        return chat
+    })
+
+    setChats(updateChats)
+     
+
+    // Update the chat with the new messages
+    const updatedChat = chat.map(c => 
+      c.id === chat[0]?.id ? {...c, message: updatedMessages} : c
+    )
+    setChats(updatedChat)
+}
+
+
   return (
     <div className='chat-app'>
       ChatBoxApp
@@ -12,11 +52,14 @@ const ChatBoxApp = () => {
           <i class="bx bx-pencil" />
             
         </div>
-        <div className="chat-list-item active">
-            <h4>chat 20/07/2026 12:59:42 PM</h4>
-             <i className="bx bx-x-circle" />
-        </div>
-
+        
+        {chat.map((chatItem, index) => (
+            <div key={index} className={`chat-list-item ${index === 0 ? 'active' : ''}`}>
+                <h4>{chatItem.id}</h4>
+                <i className="bx bx-x-circle" />
+            </div>
+        ))}
+        
         <div className="chat-list-item">
             <h4>chat 20/07/2026 12:59:42 PM</h4>
              <i className="bx bx-x-circle" />
@@ -32,7 +75,8 @@ const ChatBoxApp = () => {
             
             <h3>Chat Window with AI</h3>
            
-            <i class="bx bx-arrow-from-right-stroke arrow" />
+           {/*           onBack chatApp                     */}
+            <i class="bx bx-arrow-from-right-stroke arrow" onClick={onBack} />
         </div>
         <div className="chat">
             <div className="prompt">Hi are how you 
