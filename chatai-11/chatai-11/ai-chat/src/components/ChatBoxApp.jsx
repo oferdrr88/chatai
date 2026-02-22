@@ -11,6 +11,13 @@ const handleInputChange = (e) => {
     setInputValue(e.target.value)
 }
 
+const handleKeyDown = (e) => {
+    if(e.key === 'Enter'){
+        e.preventDefault()
+        sendMassege()
+    }
+}
+
 const sendMassege = () => {
     if(inputValue.trim() === '') return
 
@@ -79,22 +86,31 @@ const sendMassege = () => {
             <i class="bx bx-arrow-from-right-stroke arrow" onClick={onBack} />
         </div>
         <div className="chat">
-            <div className="prompt">Hi are how you 
-                <span>12:59:45 PM</span>
-            </div>
 
-             <div className="response">
-                gfjfgj fjfjf fjfjf jfjfj jfjfj rssy twtw wtwttwt jfj
-                <span>12:59:45 PM</span>
-            
-            </div>
+                              {masseges.map((msg, index) => (
+                                  <div key={index}
+                                      className={`msg ${msg.type === 'prompt' ? 'prompt' : 'response'}`}>
+                                      
+                                        {msg.text}
+                                        <span>{msg.timestamp}</span>
+
+                                   </div>
+                              ))}
+
+             
+
+
 
             <div className="typing">Typing...</div>
-            <form className='msg-form'>
+            <form className='msg-form' onSubmit={(e) =>e.preventDefault()}>
                
                 <i className="bx bx-wink-tongue smile emoji" />
                 <input type="text" className='msg-input' 
-                 placeholder='Type a message'></input>
+                 placeholder='Type a message' 
+                  onChange={handleInputChange}
+                    onKeyDown={handleKeyDown}
+                 ></input>
+                 <i className="bx bx-send send" onClick={sendMassege} />
                 
             </form>
                 
