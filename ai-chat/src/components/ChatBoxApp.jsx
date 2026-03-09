@@ -1,32 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './ChatBotApp.css'
 
 
-const ChatBoxApp = ({onBack, chat, setChats, activeChat, setActiveChat, onNewChat}) => {
+const ChatBoxApp = ({onBack, chat, setChats}) => {
 const [inputValue, setInputValue] = useState('')
-const activeChatObject = chat.find((c) => c.id === activeChat)
-const [masseges, setMasseges] = useState(activeChatObject?.message || [])
-
-useEffect(() => {
-    const activeChatObject = chat.find((c) => c.id === activeChat)
-    setMasseges(activeChatObject ? activeChatObject.message : [])
-
-}, [activeChat, chat])
+const[masseges, setMasseges] = useState(chat[0]?.message || [])
 
 
 const handleInputChange = (e) => {
     setInputValue(e.target.value)
-}
-
-const handleKeyDown = (e) => {
-    if(e.key === 'Enter'){
-        e.preventDefault()
-        sendMassege()
-    }
-}
-
-const handleSelectChat = (id) => { 
-    setActiveChat(id)
 }
 
 const sendMassege = () => {
@@ -43,8 +25,8 @@ const sendMassege = () => {
     setMasseges(updatedMessages)
     setInputValue('')
 
-    const updateChats = chat.map((chat)=>{
-        if(chat.id === activeChat){
+    const updateChats = chat.map((chat, index)=>{
+        if(index === 0){
             return {...chat, message: updatedMessages}
         }
         return chat
@@ -67,17 +49,14 @@ const sendMassege = () => {
       <div className="chat-list">
         <div className="chat-list-hader">
             <h2>Chat List</h2>
-          <i className="bx bx-pencil new-chat"  onClick={onNewChat}></i>
+          <i class="bx bx-pencil" />
             
         </div>
         
-        {chat.map((chat) => (
-            <div key={chat.id}
-             className={`chat-list-item ${chat.id
-              === activeChat ? 'active' : ''}`}
-              onClick={() => handleSelectChat(chat.id)}>
-                <h4>{chat.id}</h4>
-                <i className="bx bx-x-circle"  />
+        {chat.map((chatItem, index) => (
+            <div key={index} className={`chat-list-item ${index === 0 ? 'active' : ''}`}>
+                <h4>{chatItem.id}</h4>
+                <i className="bx bx-x-circle" />
             </div>
         ))}
         
@@ -100,31 +79,22 @@ const sendMassege = () => {
             <i class="bx bx-arrow-from-right-stroke arrow" onClick={onBack} />
         </div>
         <div className="chat">
+            <div className="prompt">Hi are how you 
+                <span>12:59:45 PM</span>
+            </div>
 
-                              {masseges.map((msg, index) => (
-                                  <div key={index}
-                                      className={`msg ${msg.type === 'prompt' ? 'prompt' : 'response'}`}>
-                                      
-                                        {msg.text}
-                                        <span>{msg.timestamp}</span>
-
-                                   </div>
-                              ))}
-
-             
-
-
+             <div className="response">
+                gfjfgj fjfjf fjfjf jfjfj jfjfj rssy twtw wtwttwt jfj
+                <span>12:59:45 PM</span>
+            
+            </div>
 
             <div className="typing">Typing...</div>
-            <form className='msg-form' onSubmit={(e) =>e.preventDefault()}>
+            <form className='msg-form'>
                
                 <i className="bx bx-wink-tongue smile emoji" />
                 <input type="text" className='msg-input' 
-                 placeholder='Type a message' 
-                  onChange={handleInputChange}
-                    onKeyDown={handleKeyDown}
-                 ></input>
-                 <i className="bx bx-send send" onClick={sendMassege} />
+                 placeholder='Type a message'></input>
                 
             </form>
                 

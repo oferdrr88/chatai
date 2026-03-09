@@ -1,6 +1,6 @@
 import React from 'react'
 import ChatBoth from './components/ChatBot.jsx'
-import ChatBothApp from './'  
+import ChatBothApp from './components/ChatBoxApp.jsx'  
 import { useState } from 'react'
 
 const App = () => {
@@ -43,5 +43,4 @@ const handeleGoBack = () => {
 
 export default App
 
-
-
+App

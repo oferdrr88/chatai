@@ -1,0 +1,30 @@
+.start-page{
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    background-color: #131927;
+}
+
+.start-page-btn{
+    width: 35rem;
+    height: 15rem;
+    background-color: rgb(226, 15, 233);
+    border: none;
+    border-radius: 1rem;
+    font-family: Epo2, sans-serif;
+    font-size: 5rem;
+    font-weight: bold;
+    color: aliceblue;
+    text-transform: uppercase;
+    letter-spacing: 1rem;
+    text-shadow: 0 0 1rem rgb(0,0,0,0.2);
+     box-shadow: 0 2rem 5rem rgb(0,0,0,0.2);
+     cursor: pointer;
+}
+
+.start-page-btn:active{
+    transform: scale(0.95);
+    box-shadow: 0 1rem 2rem rgb(0,0,0,0.2);
+    
+}

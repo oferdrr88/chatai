@@ -8,6 +8,7 @@ const App = () => {
 const [isChating, setIsChating] = useState(false)
 const [chats, setChats]= useState([])
 
+const [activeChat, setActiveChat] = useState(null)
 
 // ************************** Handle Start Chat Function **************************
 const handleStartChat = () => {
@@ -29,11 +30,34 @@ const handeleGoBack = () => {
   setIsChating(false)
 }
 
+const crateNewChat = () => {
+  const newChats = {
+
+      id: `chat-${new Date().toLocaleDateString("en-gb")}
+       ${new Date().toLocaleTimeString()}`,
+      message:[],
+    }
+
+
+    const updateChat = [newChats, ...chats]
+           setChats(updateChat)
+           setActiveChat(newChats.id)
+}
+
+
   return (
     <div className='container'>
 
 {/*                            Ischating                         */}
-      {isChating ? <ChatBothApp  onBack={handeleGoBack} chat={chats} setChats={setChats} /> :
+      {isChating ? <ChatBothApp 
+       onBack={handeleGoBack} 
+       chat={chats} 
+       setChats={setChats} 
+       activeChat={activeChat}
+       setActiveChat={setActiveChat}
+        crateNewChat={crateNewChat}
+          onNewChat={crateNewChat}
+       /> :
        <ChatBoth onStartChat={handleStartChat} />}
       {/* <ChatBoth />
       <ChatBothApp /> */}
